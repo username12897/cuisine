@@ -1,0 +1,102 @@
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: #fdf6e3; 
+    color: #5d4037; 
+    padding: 20px; 
+    display: flex;
+    justify-content: center;
+}
+
+.container { 
+    width: 100%;
+    max-width: 500px; 
+    background: white; 
+    padding: 25px; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
+}
+
+h2 { 
+    text-align: center; 
+    color: #d35400; 
+    margin-top: 0;
+}
+
+.formulaire {
+    margin-bottom: 30px;
+}
+
+input, textarea { 
+    width: 100%; 
+    padding: 12px; 
+    margin: 8px 0; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    box-sizing: border-box; 
+    font-size: 14px;
+}
+
+textarea { 
+    resize: vertical; 
+    min-height: 80px; 
+}
+
+button { 
+    width: 100%; 
+    padding: 12px; 
+    background: #27ae60; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+button:hover { 
+    background: #219150; 
+}
+
+.plat-item { 
+    background: #fff5e6; 
+    margin-top: 15px; 
+    padding: 15px; 
+    border-left: 5px solid #e67e22; 
+    border-radius: 8px; 
+    position: relative; 
+    animation: fadeIn 0.4s ease-in;
+}
+
+.plat-name { 
+    font-weight: bold; 
+    font-size: 18px; 
+    color: #a04000; 
+    padding-right: 20px;
+}
+
+.ingredients { 
+    font-style: italic; 
+    font-size: 14px; 
+    margin-top: 8px; 
+    color: #7f8c8d;
+}
+
+.delete-btn { 
+    position: absolute; 
+    top: 12px; 
+    right: 12px; 
+    color: #e74c3c; 
+    cursor: pointer; 
+    font-size: 18px;
+    opacity: 0.6;
+}
+
+.delete-btn:hover { 
+    opacity: 1; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
