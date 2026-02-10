@@ -1,7 +1,7 @@
 const SUPABASE_URL = 'https://ogeqsxkqjfhaecpuinjs.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_sQ0afUndi8LGkSYVtHD2yQ_zK_8LWsN';
 
-// Utilisation de Supabase avec un S majuscule
+// On déclare la variable UNE SEULE FOIS
 const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,7 +26,7 @@ async function ajouterPlat() {
 
     if (error) {
         console.error("Erreur d'ajout:", error);
-        alert("Erreur de connexion à la base de données");
+        alert("Erreur : " + error.message);
     } else {
         nomInput.value = "";
         ingInput.value = "";
