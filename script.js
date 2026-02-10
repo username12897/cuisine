@@ -15,7 +15,6 @@ async function ajouterPlat() {
     if (!nom || !ing) return alert("Remplis tout !");
 
     const { error } = await supabase.from('Plats').insert([{ nom: nom, ingredients: ing }]);
-
     if (error) alert("Erreur : " + error.message);
     else {
         nomInput.value = "";
