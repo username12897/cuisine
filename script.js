@@ -1,7 +1,5 @@
 const SUPABASE_URL = 'https://ogeqsxkqjfhaecpuinjs.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_sQ0afUndi8LGkSYVtHD2yQ_zK_8LWsN';
-
-// On déclare la variable UNE SEULE FOIS
 const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,20 +12,12 @@ async function ajouterPlat() {
     const ingInput = document.getElementById('ingredients');
     const nom = nomInput.value.trim();
     const ing = ingInput.value.trim();
+    if (!nom || !ing) return alert("Remplis tout !");
 
-    if (!nom || !ing) {
-        alert("Remplis tout !");
-        return;
-    }
+    const { error } = await supabase.from('Plats').insert([{ nom: nom, ingredients: ing }]);
 
-    const { error } = await supabase
-        .from('Plats')
-        .insert([{ nom: nom, ingredients: ing }]);
-
-    if (error) {
-        console.error("Erreur d'ajout:", error);
-        alert("Erreur : " + error.message);
-    } else {
+    if (error) alert("Erreur : " + error.message);
+    else {
         nomInput.value = "";
         ingInput.value = "";
         afficherPlats();
@@ -35,34 +25,21 @@ async function ajouterPlat() {
 }
 
 async function afficherPlats() {
-    const { data: plats, error } = await supabase
-        .from('Plats')
-        .select('*')
-        .order('id', { ascending: false });
-
-    if (error) {
-        console.error("Erreur de lecture:", error);
-        return;
-    }
-
+    const { data: plats, error } = await supabase.from('Plats').select('*').order('id', { ascending: false });
+    if (error) return;
     const liste = document.getElementById('listePlats');
     liste.innerHTML = "";
-
     plats.forEach((p) => {
-        const platDiv = document.createElement('div');
-        platDiv.className = 'plat-item';
-        platDiv.innerHTML = `
-            <span class="delete-btn" onclick="supprimerPlat(${p.id})">✕</span>
-            <div class="plat-name">${p.nom}</div>
-            <div class="ingredients">🛒 ${p.ingredients}</div>
-        `;
-        liste.appendChild(platDiv);
+        liste.innerHTML += `
+            <div class="plat-item">
+                <span class="delete-btn" onclick="supprimerPlat(${p.id})">✕</span>
+                <div class="plat-name">${p.nom}</div>
+                <div class="ingredients">🛒 ${p.ingredients}</div>
+            </div>`;
     });
 }
 
 window.supprimerPlat = async function(id) {
-    const { error } = await supabase.from('Plats').delete().eq('id', id);
-    if (!error) {
-        afficherPlats();
-    }
+    await supabase.from('Plats').delete().eq('id', id);
+    afficherPlats();
 };
